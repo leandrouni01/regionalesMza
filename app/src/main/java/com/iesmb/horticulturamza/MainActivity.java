@@ -1,16 +1,16 @@
 package com.iesmb.horticulturamza;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +20,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button ubicarme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 if(informacioN!= null && informacioN.isConnected()){
                     try {
                         //URL url = new URL("https://www.google.com.ar");
-                        URL url = new URL("https://swapi.co/api/people/1/");
+                        //URL url = new URL("https://swapi.co/api/people/1/");
+                        URL url = new URL("http://192.168.1.40:8080/regionalesMza/V1.0/companies/");
                         try {
                             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
                             httpConn.setRequestMethod("GET");
@@ -55,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        ubicarme= (Button) findViewById(R.id.buttonmap);
+
+        ubicarme.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+                Intent inten = new Intent(MainActivity.this , Mapa.class);
+                startActivity(inten);
             }
         });
     }
