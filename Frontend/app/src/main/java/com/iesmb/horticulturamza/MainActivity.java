@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 if(informacioN!= null && informacioN.isConnected()){
                     try {
                         //URL url = new URL("https://www.google.com.ar");
-                        //URL url = new URL("https://swapi.co/api/people/1/");
-                        URL url = new URL("http://192.168.1.40:8080/regionalesMza/V1.0/companies/");
+                        URL url = new URL("https://swapi.co/api/people/1/");
+                        //URL url = new URL("http://192.168.1.40:8080/regionalesMza/V1.0/companies/");
                         try {
                             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
                             httpConn.setRequestMethod("GET");
@@ -48,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
                             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                             String line = bufferedReader.readLine();
+                            JsonObject obj = new JsonParser().parse(line).getAsJsonObject();
                             TextView textView = findViewById(R.id.tex);
-                            textView.setText(line);
+                            textView.setText(obj.get("name").getAsString());
                             httpConn.disconnect();
                         } catch (IOException e) {
                             e.printStackTrace();
