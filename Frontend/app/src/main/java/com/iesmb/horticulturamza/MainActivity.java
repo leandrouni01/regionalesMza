@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.StrictMode;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     private Button ubicarme;
+    private Button postButton = (Button) findViewById(R.id.buttonPost);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +75,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(inten);
             }
         });
+
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://httpbin.org/post";
+                StringRequest postRequest = new StringRequest(Request.Method.POST,url, new Response.Listener<String>(){
+                    public void onResponse(String response){
+                        Log.d("Response", response);
+                    }
+                }, new Response.ErrorListener(){
+                    public void onErrorResponse(VolleyError error){
+                        Log.d("Error.Response", error);
+                    }
+                }){
+                    protected Map<String, String> getParams(){
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("name","Ali");
+                        params.put("domain","http://localhost:8080");
+                        return params;
+                    }
+                };
+                queue.add(postRequest);
+            }
+        });
+
     }
 }
