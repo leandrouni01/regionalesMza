@@ -44,8 +44,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tex"
-            android:text="@string/saludo"
+            android:text="@string/Mapa"
             android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/textPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonmap"
+            />
     </RelativeLayout>
 
 
