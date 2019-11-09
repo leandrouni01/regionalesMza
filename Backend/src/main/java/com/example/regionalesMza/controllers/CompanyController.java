@@ -16,11 +16,11 @@ import com.example.regionalesMza.services.CompanyService;
 @Controller
 @RestController
 @RequestMapping(path = "/regionalesMza/V1.0/companies")
-public class CompanyController implements ObjectController<CompanyDTO>{
-	
+public class CompanyController implements ObjectController<CompanyDTO> {
+
 	private CompanyService companyService;
-	
-	public CompanyController (CompanyService companyService) {
+
+	public CompanyController(CompanyService companyService) {
 		this.companyService = companyService;
 	}
 
@@ -36,9 +36,17 @@ public class CompanyController implements ObjectController<CompanyDTO>{
 	@CrossOrigin("*")
 	@GetMapping(path = "/{id}")
 	public CompanyDTO getOne(@PathVariable int id) {
-		
+
 		return ResponseEntity.status(204).body(companyService.getOne(id)).getBody();
-		
+
+	}
+
+	@Override
+	@CrossOrigin("*")
+	@GetMapping(path = "/catalogs/{catalog}")
+	public List<CompanyDTO> getByCatalog(@PathVariable String catalog) {
+
+		return ResponseEntity.status(204).body(companyService.getByCatalog(catalog)).getBody();
 	}
 
 	@Override
@@ -58,5 +66,5 @@ public class CompanyController implements ObjectController<CompanyDTO>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

@@ -9,5 +9,6 @@ public interface ObjectService <T>{
 	public T save(T t);
 	public T update(T t, int id);
 	public boolean delete(int id);
+	public List<T> getByCatalog(String catalog);
 	
 }

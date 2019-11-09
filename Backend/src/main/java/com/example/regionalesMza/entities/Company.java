@@ -22,6 +22,7 @@ public class Company {
 	@Column(unique = true)
 	private String phone;
 	
+	private String catalog;
 	
 	private String full_addres;
 	
@@ -35,10 +36,11 @@ public class Company {
 		
 	}
 	
-	public Company(String name, String cuit, String phone, String full_addres, String latitude, String longitude) {
+	public Company(String name, String cuit, String phone, String catalog ,String full_addres, String latitude, String longitude) {
 		this.name = name;
 		this.cuit = cuit;
 		this.phone = phone;
+		this.catalog = catalog;
 		this.full_addres = full_addres;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -87,6 +89,14 @@ public class Company {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
 	}
 	
 	

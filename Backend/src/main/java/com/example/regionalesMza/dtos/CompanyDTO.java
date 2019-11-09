@@ -8,6 +8,7 @@ public class CompanyDTO implements Serializable{
 	private String name;
 	private String cuit;
 	private String phone;
+	private String catalog;
 	private String full_addres;
 	private String latitude;
 	private String longitude;
@@ -18,10 +19,11 @@ public class CompanyDTO implements Serializable{
 		
 	}
 
-	public CompanyDTO(String name, String cuit, String phone, String full_addres, String latitude, String longitude) {
+	public CompanyDTO(String name, String cuit, String phone, String catalog, String full_addres, String latitude, String longitude) {
 		this.name = name;
 		this.cuit = cuit;
 		this.phone = phone;
+		this.catalog = catalog;
 		this.full_addres = full_addres;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -81,6 +83,14 @@ public class CompanyDTO implements Serializable{
 
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
 	}	
 	
 }

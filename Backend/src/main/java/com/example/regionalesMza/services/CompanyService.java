@@ -11,11 +11,10 @@ import com.example.regionalesMza.entities.Company;
 import com.example.regionalesMza.repositories.CompanyRepository;
 
 @Service
-public class CompanyService implements ObjectService<CompanyDTO>{
+public class CompanyService implements ObjectService<CompanyDTO> {
 
-	private CompanyRepository companyRepository;	
-	
-	
+	private CompanyRepository companyRepository;
+
 	public CompanyService(CompanyRepository companyRepository) {
 		this.companyRepository = companyRepository;
 	}
@@ -24,7 +23,7 @@ public class CompanyService implements ObjectService<CompanyDTO>{
 	public List<CompanyDTO> getAll() {
 
 		List<CompanyDTO> result = new ArrayList<>();
-		
+
 		for (Company company : companyRepository.findAll()) {
 			CompanyDTO temp = new CompanyDTO();
 			temp.setId(company.getId());
@@ -42,12 +41,12 @@ public class CompanyService implements ObjectService<CompanyDTO>{
 	@Override
 	public CompanyDTO getOne(int id) {
 		Optional<Company> aOptional = companyRepository.findById(id);
-		
+
 		CompanyDTO temp = new CompanyDTO();
-		
+
 		try {
 			Company company = aOptional.get();
-			
+
 			temp.setId(company.getId());
 			temp.setName(company.getName());
 			temp.setPhone(company.getPhone());
@@ -55,11 +54,34 @@ public class CompanyService implements ObjectService<CompanyDTO>{
 			temp.setFull_addres(company.getFull_addres());
 			temp.setLatitude(company.getLatitude());
 			temp.setLongitude(company.getLongitude());
-			
+
 		} catch (Exception e) {
 			System.out.println("Non existing id");
 		}
 		return temp;
+	}
+
+	@Override
+	public List<CompanyDTO> getByCatalog(String catalog) {
+
+		List<CompanyDTO> result = new ArrayList<>();
+
+		for (Company company : companyRepository.findByCatalog(catalog)) {
+			CompanyDTO temp = new CompanyDTO();
+			temp.setId(company.getId());
+			temp.setName(company.getName());
+			temp.setPhone(company.getPhone());
+			temp.setCuit(company.getCuit());
+			temp.setCatalog(company.getCatalog());
+			temp.setFull_addres(company.getFull_addres());
+			temp.setLatitude(company.getLatitude());
+			temp.setLongitude(company.getLongitude());
+			
+			result.add(temp);
+		}
+		
+		return result;
+
 	}
 
 	@Override
@@ -80,8 +102,4 @@ public class CompanyService implements ObjectService<CompanyDTO>{
 		return false;
 	}
 
-	
-
-	
-	
 }

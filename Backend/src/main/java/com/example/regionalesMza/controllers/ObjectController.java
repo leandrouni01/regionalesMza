@@ -11,5 +11,5 @@ public interface ObjectController <T>{
 	public ResponseEntity save(T t);
 	public ResponseEntity update(T t, int id);
 	public ResponseEntity delete(int id);
-	
+	public List<T> getByCatalog(String catalog);
 }
